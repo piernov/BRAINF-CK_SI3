@@ -3,10 +3,10 @@
 # How to compile
 
 ## With JUnit (Example)
->javac -d bin/ -cp junit-4.12.jar src/brainfuck/\*.java src/brainfuck/instructions/\*.java src/brainfuck/virtualmachine/\*.java src/test/brainfuck/virtualmachine/MemoryTest.java
+>javac -d bin/ -cp junit-4.12.jar src/brainfuck/*.java src/brainfuck/instructions/*.java src/brainfuck/virtualmachine/*.java src/test/brainfuck/virtualmachine/MemoryTest.java
 
 ## Without JUnit
->javac -d bin/ src/brainfuck/\*.java src/brainfuck/instructions/\*.java src/brainfuck/virtualmachine/\*.java
+>javac -d bin/ src/brainfuck/*.java src/brainfuck/instructions/*.java src/brainfuck/virtualmachine/*.java
 
 # How to run
 
