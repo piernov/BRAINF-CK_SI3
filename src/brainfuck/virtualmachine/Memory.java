@@ -53,6 +53,10 @@ public class Memory {
 		if (i < 0 || i >= memory.length) throw new OutOfMemoryException(i, memory.length);
 	}
 
+	public int getSize(){
+		return this.size;
+	}
+
 	/**
 	 * Returns the value in memory at the specified index.
 	 *
