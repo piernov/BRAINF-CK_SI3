@@ -1,8 +1,9 @@
 package test.brainfuck.virtualmachine;
 
 import brainfuck.virtualmachine.Memory;
-import brainfuck.virtualmachine.OverflowException;
+import brainfuck.virtualmachine.OutOfMemoryException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.Class;
 
@@ -32,27 +33,24 @@ public class MemoryTest{
 		Memory mem = new Memory(21432);
 		assertEquals(21432, mem.getSize());
 	}
-/*
-	@Test//(expected = OverflowException.class)
-	public void checkBoundsUnderflow(){
+
+	@Test(expected = OutOfMemoryException.class)
+	public void checkBoundsUnderflow() throws Throwable {
 		Memory mem = new Memory();
-		thrown.except((Throwable)OverflowException.class);
 		try{
 			Method method = Memory.class.getDeclaredMethod("checkBounds",Integer.TYPE);
 			method.setAccessible(true);
 			method.invoke(mem,-1);
-			//thrown.except(OverflowException.class);
-			//thrown.except(NullPointerException.class);java -cp "./hamcrest-core-1.3.jar:./junit-4.12.jar:./bin" org.junit.runner.JUnitCore test.brainfuck.virtualmachine.MemoryTest
 
-		}catch(Exception e){
-			e.printStackTrace();
-//			e.getTargetException();
+		} catch (InvocationTargetException ite) {
+			throw ite.getCause();
 		}
 	}
-*/
+
 	@Test(expected = NullPointerException.class)
 	public void testExcep(){
 		Memory mem = null;
 		mem.getSize();
 	}
+
 }
