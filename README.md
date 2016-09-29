@@ -1,4 +1,4 @@
-# Miaou
+# Miaou [![Build Status](https://travis-ci.org/piernov/BRAINF-CK_SI3.svg?branch=wip%2Ftravis)](https://travis-ci.org/piernov/BRAINF-CK_SI3)
 
 # How to compile
 
