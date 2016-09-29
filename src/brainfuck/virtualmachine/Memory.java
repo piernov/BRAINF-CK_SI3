@@ -1,5 +1,7 @@
 package brainfuck.virtualmachine;
 
+import java.util.Arrays;
+
 /**
  * Memory container which is basically an interface for an array of bytes.
  *
@@ -30,6 +32,7 @@ public class Memory {
 	public Memory(int size) {
 		this.size = size;
 		memory = new byte[size];
+		Arrays.fill(memory, Byte.MIN_VALUE);
 	}
 
 	/**
