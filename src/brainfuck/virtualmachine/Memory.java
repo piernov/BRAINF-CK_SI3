@@ -18,7 +18,7 @@ public class Memory {
 		return this.size;
 	}
 
-	private void checkBounds(int i) throws OutOfMemoryException {
+	public void checkBounds(int i) throws OutOfMemoryException {
 		if (i < 0 || i >= size) throw new OutOfMemoryException(i, size);
 	}
 
