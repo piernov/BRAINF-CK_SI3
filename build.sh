@@ -2,7 +2,7 @@
 # build script
 
 # Build classes
-javac -Xlint:unchecked -d bin/ -cp bin/ `find src/brainfuck -name \*.java`
+javac -d bin/ -cp bin/:/usr/share/java/junit.jar `find src -name \*.java`
 
 # Builds the jar archive
 # See https://docs.oracle.com/javase/tutorial/deployment/jar/appman.html
