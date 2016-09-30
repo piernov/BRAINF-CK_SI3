@@ -1,6 +1,6 @@
 package test.brainfuck.virtualmachine;
 
-import brainfuck.Instruction;
+import brainfuck.instructions.Instruction;
 import brainfuck.instructions.Incr;
 import brainfuck.virtualmachine.Machine;
 import brainfuck.virtualmachine.Memory;
