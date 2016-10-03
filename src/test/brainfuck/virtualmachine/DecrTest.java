@@ -1,10 +1,11 @@
 package test.brainfuck.virtualmachine;
 
+import test.brainfuck.TestSuite;
+
 import brainfuck.instructions.Instruction;
 import brainfuck.instructions.Decr;
 import brainfuck.virtualmachine.Machine;
 import brainfuck.virtualmachine.Memory;
-import brainfuck.virtualmachine.OverflowException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -46,12 +47,11 @@ public class DecrTest{
 		assertEquals(val-count, machine.readMemory());
 	}
 
-	@Test(expected = OverflowException.class)
+	@Test(expected = TestSuite.OverflowException.class)
 	public void decrOverflow() throws Throwable {
 		Instruction decr = new Decr();
 		Machine machine = new Machine();
 
 		decr.accept(machine);
 	}
-
 }

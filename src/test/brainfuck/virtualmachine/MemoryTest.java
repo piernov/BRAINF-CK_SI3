@@ -1,7 +1,8 @@
 package test.brainfuck.virtualmachine;
 
+import test.brainfuck.TestSuite;
+
 import brainfuck.virtualmachine.Memory;
-import brainfuck.virtualmachine.OutOfMemoryException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,10 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.Rule;
 
-public class MemoryTest{
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-
+public class MemoryTest {
 	@Test
 	public void memoryConstructorAllocation(){
 		Memory mem = new Memory();
@@ -34,14 +32,13 @@ public class MemoryTest{
 		assertEquals(21432, mem.getSize());
 	}
 
-	@Test(expected = OutOfMemoryException.class)
+	@Test(expected = TestSuite.OutOfMemoryException.class)
 	public void checkBoundsUnderflow() throws Throwable {
 		Memory mem = new Memory();
-		try{
+		try {
 			Method method = Memory.class.getDeclaredMethod("checkBounds",Integer.TYPE);
 			method.setAccessible(true);
 			method.invoke(mem,-1);
-
 		} catch (InvocationTargetException ite) {
 			throw ite.getCause();
 		}
@@ -52,5 +49,4 @@ public class MemoryTest{
 		Memory mem = null;
 		mem.getSize();
 	}
-
 }

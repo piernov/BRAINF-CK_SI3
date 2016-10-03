@@ -1,10 +1,11 @@
 package test.brainfuck.virtualmachine;
 
+import test.brainfuck.TestSuite;
+
 import brainfuck.instructions.Instruction;
 import brainfuck.instructions.Incr;
 import brainfuck.virtualmachine.Machine;
 import brainfuck.virtualmachine.Memory;
-import brainfuck.virtualmachine.OverflowException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -44,7 +45,7 @@ public class IncrTest{
 		assertEquals(value+count, machine.readMemory());
 	}
 
-	@Test(expected = OverflowException.class)
+	@Test(expected = TestSuite.OverflowException.class)
 	public void incrOverflow() throws Throwable {
 		Instruction incr = new Incr();
 		Machine machine = new Machine();
@@ -52,5 +53,4 @@ public class IncrTest{
 
 		for (int i = 0; i < count; i++) incr.accept(machine);
 	}
-
 }
