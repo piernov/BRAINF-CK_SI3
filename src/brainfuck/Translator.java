@@ -1,5 +1,7 @@
 package brainfuck;
 
+import java.util.ArrayList;
+
 /**
  * Translate an instruction in an other form.
  * @author Miaou
@@ -17,6 +19,17 @@ package brainfuck;
    }
 
    /**
+ 	 * Write the instruction with the long syntax.
+   *
+   * @param instructions list of instructions to translate.
+ 	 */
+   public void toLongSyntax(ArrayList<Instruction> instructions) {
+     for (int i = 0; i < instructions.size(); i++) {
+       System.out.println(instructions.get(i).getName());
+     }
+   }
+
+   /**
  	 * Write the instruction in the short syntax.
  	 *
  	 * @param instr	instruction to translate.
@@ -26,11 +39,33 @@ package brainfuck;
    }
 
    /**
+ 	 * Write the instruction in the short syntax.
+ 	 *
+ 	 * @param instructions list of instructions to translate.
+ 	 */
+   public void toShortSyntax(ArrayList<Instruction> instructions) {
+     for (int i = 0; i < instructions.size(); i++) {
+       System.out.print(instructions.get(i).getSymbol());
+     }
+   }
+
+   /**
  	 * Write the instruction in a sequence of hexadecimal numbers.
  	 *
  	 * @param instr	instruction to translate.
  	 */
    public void toColor(Instruction instr) {
      System.out.print(String.format("%02X%02X%02X", instr.getColor()[0], instr.getColor()[1], instr.getColor()[2]));
+   }
+
+   /**
+ 	 * Write the instruction in a sequence of hexadecimal numbers.
+ 	 *
+ 	 * @param instructions list of instructions to translate.
+ 	 */
+   public void toColor(ArrayList<Instruction> instructions) {
+     for (int i = 0; i < instructions.size(); i++) {
+       System.out.print(String.format("%02X%02X%02X", instructions.get(i).getColor()[0], instructions.get(i).getColor()[1], instructions.get(i).getColor()[2]));
+     }
    }
  }
