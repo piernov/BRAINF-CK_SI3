@@ -1,6 +1,6 @@
 package brainfuck;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Translate an instruction in an other form.
@@ -23,7 +23,7 @@ import java.util.ArrayList;
    *
    * @param instructions list of instructions to translate.
  	 */
-   public void toLongSyntax(ArrayList<Instruction> instructions) {
+   public void toLongSyntax(List<Instruction> instructions) {
      for (int i = 0; i < instructions.size(); i++) {
        System.out.println(instructions.get(i).getName());
      }
@@ -43,7 +43,7 @@ import java.util.ArrayList;
  	 *
  	 * @param instructions list of instructions to translate.
  	 */
-   public void toShortSyntax(ArrayList<Instruction> instructions) {
+   public void toShortSyntax(List<Instruction> instructions) {
      for (int i = 0; i < instructions.size(); i++) {
        System.out.print(instructions.get(i).getSymbol());
      }
@@ -55,7 +55,7 @@ import java.util.ArrayList;
  	 * @param instr	instruction to translate.
  	 */
    public void toColor(Instruction instr) {
-     System.out.print(String.format("%02X%02X%02X", instr.getColor()[0], instr.getColor()[1], instr.getColor()[2]));
+     System.out.print(String.format("FF%02X%02X%02X", instr.getColor()[0], instr.getColor()[1], instr.getColor()[2]));
    }
 
    /**
@@ -63,9 +63,9 @@ import java.util.ArrayList;
  	 *
  	 * @param instructions list of instructions to translate.
  	 */
-   public void toColor(ArrayList<Instruction> instructions) {
+   public void toColor(List<Instruction> instructions) {
      for (int i = 0; i < instructions.size(); i++) {
-       System.out.print(String.format("%02X%02X%02X", instructions.get(i).getColor()[0], instructions.get(i).getColor()[1], instructions.get(i).getColor()[2]));
+       System.out.print(String.format("FF%02X%02X%02X", instructions.get(i).getColor()[0], instructions.get(i).getColor()[1], instructions.get(i).getColor()[2]));
      }
    }
  }
