@@ -1,17 +1,20 @@
 package brainfuck;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.List;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Color;
 
 /**
  * Build a bmp image from a list of instructions.
  *
  * @author Miaou
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html>BufferedImage</a>
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html">Graphics</a>
  * @see Translator
  */
 
@@ -22,6 +25,11 @@ class ImageWriter {
   private BufferedImage image;
 
   /**
+   * Graphic which regroup all the squares.
+   */
+  private Graphics graph;
+
+  /**
    * Instructions to represent in the image.
    */
   private List<Integer> colors;
@@ -29,68 +37,51 @@ class ImageWriter {
   /**
    * Width and height of the image (number of pixels).
    */
-  private int size;
+  private int sizeImg;
 
   /**
-   * Size of a square.
+   * Width and height of a square (number of pixels).
    */
-  private static final int SIZE = 3;
+  private static final int SIZE_SQUARE = 3;
 
   /**
-   * Number of cases in a column or a line.
-   */
-  private int nbCol;
-
-  /**
-   * Constructs a BufferedImage and writes it.
+   * Constructs an image and draws it.
    *
    * @param colors  list of the color of each pixel
    */
   public ImageWriter(List<Integer> colors) {
     this.colors = colors;
-    size = 3*(int)Math.ceil(Math.sqrt(colors.size()));
-    nbCol = size/SIZE;
-    image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
+    sizeImg = 3*(int)Math.ceil(Math.sqrt(colors.size()));
+    image = new BufferedImage(sizeImg, sizeImg, BufferedImage.TYPE_INT_RGB);
+    graph = image.createGraphics();
     draw();
-    writeBmp("./bfck.bmp");
+    writeBmp();
   }
 
   /**
-   * Draw each square of the image.
+   * Draw each square in the graphic.
    */
   public void draw() {
-    for (int y = 0; y < nbCol; y++) {
-      for (int x = 0; x < nbCol; x++) {
-        drawSquare(x, y);
-      }
-    }
-  }
-
-  /**
-   * Draw each square of the image.
-   */
-  public void drawSquare(int col, int line) {
-    for (int i = 0; i < SIZE; i++) {
-      for (int j = 0; j < SIZE; j++) {
-        if (col+line*nbCol >= colors.size()) {
-          image.setRGB(col*SIZE+i, line*SIZE+j, 0x000000);
+    int nbCol = sizeImg / SIZE_SQUARE;
+    for (int i = 0; i < nbCol; i++) {
+      for (int j = 0; j < nbCol; j++) {
+        if ((i*nbCol+j) >= colors.size()) {
+          graph.setColor(Color.BLACK);
         }
         else {
-          image.setRGB(col*SIZE+i, line*SIZE+j, colors.get(col+line*nbCol));
+          graph.setColor(new Color(colors.get(i*nbCol+j)));
         }
+        graph.fillRect(j*SIZE_SQUARE, i*SIZE_SQUARE, SIZE_SQUARE, SIZE_SQUARE);
       }
     }
   }
 
   /**
-   * Print the image.
-   *
-   * @param path  path of the destination of the image
+   * Create the file from the BufferedImage.
    */
-  public void writeBmp(String path) {
+  public void writeBmp() {
     try {
-      RenderedImage rendImage = image;
-      ImageIO.write(rendImage, "bmp", new File(path));
+      ImageIO.write(image, "bmp", new File("./bfck.bmp"));
     } catch (IOException e) {
       System.out.println(e);
     }
