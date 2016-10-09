@@ -2,6 +2,7 @@ package brainfuck;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import javax.imageio.ImageIO;
 import java.util.List;
 import java.awt.image.BufferedImage;
@@ -57,7 +58,7 @@ class ImageWriter {
    *
    * @param colors  list of the color of each pixel
    */
-  public ImageWriter(List<Integer> colors) {
+  public ImageWriter(List<Integer> colors) throws IOException, FileNotFoundException {
     this.colors = colors;
     nbCol = (int)Math.ceil(Math.sqrt(colors.size()));
     image = new BufferedImage(SIZE_SQUARE*nbCol, SIZE_SQUARE*nbCol, BufferedImage. TYPE_INT_RGB);
@@ -70,13 +71,8 @@ class ImageWriter {
    * Add each square in the graphic.
    */
   private void draw() {
-    for (int i = 0; i < nbCol*nbCol; i++) {
-      if (i >= colors.size()) {
-        graph.setColor(Color.BLACK);
-      }
-      else {
-        graph.setColor(new Color(colors.get(i)));
-      }
+    for (int i = 0; i < colors.size(); i++) {
+      graph.setColor(new Color(colors.get(i)));
       graph.fillRect(SIZE_SQUARE*(i%nbCol), SIZE_SQUARE*(i/nbCol), SIZE_SQUARE, SIZE_SQUARE);
     }
   }
@@ -84,11 +80,7 @@ class ImageWriter {
   /**
    * Create the file from the BufferedImage.
    */
-  private void writeBmp() {
-    try {
-      ImageIO.write(image, "bmp", new File(PATH));
-    } catch (IOException e) {
-      System.out.println(e);
-    }
+  private void writeBmp() throws IOException, FileNotFoundException {
+    ImageIO.write(image, "bmp", new File(PATH));
   }
 }
