@@ -3,6 +3,7 @@ package test.brainfuck.virtualmachine;
 import test.brainfuck.TestSuite;
 
 import brainfuck.virtualmachine.Memory;
+import brainfuck.exceptions.OutOfMemoryException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,7 +33,7 @@ public class MemoryTest {
 		assertEquals(21432, mem.getSize());
 	}
 
-	@Test(expected = TestSuite.OutOfMemoryException.class)
+	@Test(expected = OutOfMemoryException.class)
 	public void checkBoundsUnderflow() throws Throwable {
 		Memory mem = new Memory();
 		try {

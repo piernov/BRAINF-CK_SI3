@@ -54,7 +54,7 @@ public class Memory {
 	}
 
 	public int getSize(){
-		return this.size;
+		return this.memory.length;
 	}
 
 	/**

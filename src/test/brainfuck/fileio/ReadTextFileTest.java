@@ -1,6 +1,6 @@
-package test.brainfuck.virtualmachine;
+package test.brainfuck.fileio;
 
-import brainfuck.ReadFile;
+import brainfuck.fileio.ReadTextFile;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,7 +23,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 
-public class ReadFileTest{
+public class ReadTextFileTest{
 	/* http://stackoverflow.com/a/34818800 */
 	static void assertStreamEquals(Stream<?> s1, Stream<?> s2)
 	{
@@ -37,26 +37,26 @@ public class ReadFileTest{
 	public TemporaryFolder testFolder = new TemporaryFolder();
 
 	@Test
-	public void readFileConstructorAllocation() throws IOException, FileNotFoundException {
+	public void readTextFileConstructorAllocation() throws IOException, FileNotFoundException {
 		String filename = testFolder.newFile("validFile.txt").toString();
-		ReadFile rf = new ReadFile(filename);
+		ReadTextFile rf = new ReadTextFile(filename);
 		assertNotNull(rf);
 	}
 
 	@Test(expected = FileNotFoundException.class)
-	public void readFileConstructorNotFound() throws FileNotFoundException {
-		ReadFile rf = new ReadFile(testFolder.getRoot().toString() + "/invalidFile.txt");
+	public void readTextFileConstructorNotFound() throws FileNotFoundException {
+		ReadTextFile rf = new ReadTextFile(testFolder.getRoot().toString() + "/invalidFile.txt");
 	}
 
 	@Test
-	public void readFileCheckContent() throws IOException, FileNotFoundException {
+	public void readTextFileCheckContent() throws IOException, FileNotFoundException {
 		String filename = testFolder.newFile("validFile.txt").getPath();
 		Path filepath = Paths.get(filename);
 		try (BufferedWriter writer = Files.newBufferedWriter(filepath)) {
-			writer.write("+++\n<<<\n>"); // Test content
+			writer.write("Hello \nWorld!"); // Test content
 		}
 		Stream<String> stream = Files.lines(filepath);
-		ReadFile rf = new ReadFile(filename);
-		assertStreamEquals(stream, rf.getLines());
+		ReadTextFile rf = new ReadTextFile(filename);
+		assertStreamEquals(stream, rf.getData());
 	}
 }

@@ -1,4 +1,4 @@
-package test.brainfuck.virtualmachine;
+package test.brainfuck.instructions;
 
 import test.brainfuck.TestSuite;
 
@@ -6,6 +6,7 @@ import brainfuck.instructions.Instruction;
 import brainfuck.instructions.Decr;
 import brainfuck.virtualmachine.Machine;
 import brainfuck.virtualmachine.Memory;
+import brainfuck.exceptions.OverflowException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -47,7 +48,7 @@ public class DecrTest{
 		assertEquals(val-count, machine.readMemory());
 	}
 
-	@Test(expected = TestSuite.OverflowException.class)
+	@Test(expected = OverflowException.class)
 	public void decrOverflow() throws Throwable {
 		Instruction decr = new Decr();
 		Machine machine = new Machine();

@@ -8,13 +8,15 @@ import org.junit.runners.Suite;
 import org.junit.rules.ExternalResource;
 
 import test.brainfuck.virtualmachine.*;
+import test.brainfuck.instructions.*;
+import test.brainfuck.fileio.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	IncrTest.class,
 	DecrTest.class,
 	MemoryTest.class,
-	ReadFileTest.class
+	ReadTextFileTest.class
 })
 
 public class TestSuite {
