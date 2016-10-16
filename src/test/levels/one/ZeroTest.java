@@ -33,4 +33,39 @@ public class ZeroTest {
 		assertEquals(0, ComplianceSuite.errContent.size());
 		assertEquals(0, ComplianceSuite.exitCode);
 	}
+
+	@Test
+	public void invalidInstr() throws IOException, FileNotFoundException {
+		String path = ComplianceSuite.createTmpFile("invalidinstr.bf");
+		ComplianceSuite.writeToFile(path, "XNCR");
+
+		try {
+			Main.main(new String[] { "-p", path });
+		} catch (SecurityException se) {
+		}
+
+		assertEquals(0, ComplianceSuite.outContent.size());
+		assertEquals(true, ComplianceSuite.errContent.toString().contains("X"));
+		assertEquals(6, ComplianceSuite.exitCode);
+	}
+
+	@Test
+	public void noFilename() throws IOException, FileNotFoundException {
+		try {
+			Main.main(new String[] { "-p"});
+		} catch (SecurityException se) {
+		}
+
+		assertEquals(0, ComplianceSuite.outContent.size());
+		assertEquals(true, ComplianceSuite.errContent.toString().contains("No file"));
+		assertEquals(5, ComplianceSuite.exitCode);
+	}
+
+	@Test(expected = FileNotFoundException.class)
+	public void fileNotFound() throws IOException, FileNotFoundException {
+		try {
+			Main.main(new String[] { "-p", "nonexistentfile.bf"});
+		} catch (SecurityException se) {
+		}
+	}
 }
