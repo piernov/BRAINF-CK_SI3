@@ -23,8 +23,8 @@ import test.levels.one.*;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	ZeroTest.class,
-//	One.class,
-//	Two.class,
+	OneTest.class,
+	TwoTest.class,
 //	Three.class
 })
 
@@ -58,6 +58,12 @@ public class ComplianceSuite {
 
 		System.setOut(null);
 		System.setErr(null);
+	}
+
+	public static void reset() {
+		outContent.reset();
+		errContent.reset();
+		exitCode = 0;
 	}
 
 	public static String createTmpFile(String name) throws IOException {

@@ -29,8 +29,8 @@ public class ZeroTest {
 		} catch (SecurityException se) {
 		}
 
-		assertEquals(ComplianceSuite.outContent.size(), 0);
-		assertEquals(ComplianceSuite.errContent.size(), 0);
-		assertEquals(ComplianceSuite.exitCode, 0);
+		assertEquals(0, ComplianceSuite.outContent.size());
+		assertEquals(0, ComplianceSuite.errContent.size());
+		assertEquals(0, ComplianceSuite.exitCode);
 	}
 }
