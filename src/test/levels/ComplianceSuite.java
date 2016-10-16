@@ -25,7 +25,8 @@ import test.levels.one.*;
 	ZeroTest.class,
 	OneTest.class,
 	TwoTest.class,
-//	Three.class
+	ThreeTest.class,
+	FourTest.class
 })
 
 public class ComplianceSuite {
