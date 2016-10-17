@@ -38,6 +38,7 @@ import test.levels.one.*;
 	FiveTest.class,
 	SixTest.class,
 	SevenTest.class,
+	EightTest.class,
 })
 
 public class ComplianceSuite {
@@ -104,5 +105,29 @@ public class ComplianceSuite {
 		}
 
 		ImageIO.write(image, "bmp", new File(filename));
+	}
+
+	public static int[] readGenImage() throws IOException {
+		String filename = System.getProperty("user.dir") + "/bfck.bmp";
+		File file = new File(filename);
+		BufferedImage img = ImageIO.read(file);
+
+		int height = img.getHeight();
+		int width = img.getWidth();
+
+		int nbLine = (int)Math.ceil((float)height/3);
+		int nbCol = (int)Math.ceil((float)width/3);
+
+		int[] colors = new int[nbLine*nbCol];
+
+		int i = 0;
+		for (int y = 0 ; y < height ; y+=3) {
+			for (int x = 0 ; x < width ; x+=3) {
+				colors[i] = img.getRGB(x, y);
+				i++;
+			}
+		}
+
+		return colors;
 	}
 }
