@@ -3,7 +3,6 @@ package brainfuck.instructions;
 import brainfuck.Instruction;
 import brainfuck.BracketCounter;
 import brainfuck.virtualmachine.Machine;
-import brainfuck.virtualmachine.OutOfMemoryException;
 
 /**
  * Jump instruction: jump to the instruction right after the associated BACK if the pointed
@@ -19,7 +18,7 @@ public class Jump extends Instruction implements ConditionalJump {
 	 * Constructs the Jump instruction.
 	 */
 	public Jump() {
-		super("JUMP", '[', 0xFF9400D3);
+		super("JUMP", '[', 0xFFFF7F00);
 	}
 
 
@@ -39,6 +38,11 @@ public class Jump extends Instruction implements ConditionalJump {
 		}
 	}
 
+	/**
+	 * Increments the left bracket counter.
+	 *
+	 * @param bc	BracketCounter whose left bracket count is to be incremented.
+	 */
 	@Override
 	public void incr(BracketCounter bc) {
 		bc.incrLeft();

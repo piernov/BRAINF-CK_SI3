@@ -9,9 +9,10 @@ import java.util.Scanner;
 
 import brainfuck.InstructionSet;
 import brainfuck.Instruction;
-import brainfuck.WriteTextFile;
+import brainfuck.fileio.WriteTextFile;
 import brainfuck.instructions.ConditionalJump;
 import brainfuck.BracketCounter;
+import brainfuck.exceptions.EndOfInputException;
 
 /**
  * Actual virtual machine which processes the instructions and interracts with the memory.
@@ -34,12 +35,12 @@ public class Machine {
 	private InstructionSet iset;
 
 	/**
-	 * Input flux if specified
+	 * Input flux if specified.
 	 */
 	private	List<Character> inputs;
 
 	/**
-	 * Output flux if specified
+	 * Output flux if specified.
 	 */
 	private WriteTextFile output;
 
@@ -48,10 +49,19 @@ public class Machine {
 	 */
 	private int location = 0;
 
+	/**
+	 * True if we are currently jumping back or to another ConditionalJump instruction.
+	 */
 	private boolean jumping = false;
 
+	/**
+	 * True if the Interpreter needs to browse the instructions in reverse order.
+	 */
 	private boolean reversed = false;
 
+	/**
+	 * Bracket counter for conditional jumps instruction matching.
+	 */
 	private BracketCounter bracketCounter;
 
 	/**
@@ -60,7 +70,7 @@ public class Machine {
 	public Machine() {
 		memory = new Memory();
 		iset = new InstructionSet();
-		bracketCounter = new BracketCounter() {
+		bracketCounter = new BracketCounter() { // Anonymous class for defining the onMatch() callback method.
 			@Override protected void onMatch() {
 				Machine.this.setJumping(false);
 				Machine.this.setReversed(false);
@@ -88,34 +98,14 @@ public class Machine {
 	}
 
 	/**
-	 * Fetch an instruction by its keyword and execute it.
+	 * Execute an instruction.
+	 * Instruction is not executed if we are currently jumping.
 	 *
-	 * @param name	Instruction's keyword
-	 * @return false if the instruction is invalid true otherwise.
+	 * @param instr	Instruction to execute.
 	 */
-	public boolean executeOp(String name) {
-		Instruction instr = iset.getOp(name);
-		if (instr == null) return false;
-		if (!jumping) instr.accept(this);
-		return true;
-	}
-
-	/**
-	 * Fetch an instruction by its symbol and execute it.
-	 *
-	 * @param symbol	Instruction's symbol
-	 * @return false if the instruction is invalid, true otherwise.
-	 */
-	public boolean executeOp(char symbol) {
-		Instruction instr = iset.getOp(symbol);
-		if (instr == null) return false;
-		if (!jumping) instr.accept(this);
-		return true;
-	}
-
 	public void executeOp(Instruction instr) {
 		if (!jumping) instr.accept(this); // Jumping may be modified in there
-		if (jumping && instr instanceof ConditionalJump) {
+		if (jumping && instr instanceof ConditionalJump) { // Increase the corresponding counter when encountering a conditional jump instruction
 			((ConditionalJump) instr).incr(bracketCounter);
 		}
 
@@ -138,24 +128,44 @@ public class Machine {
 		location = i;
 	}
 
+	/**
+	 * Enables or disables the jumping mode.
+	 *
+	 * @param jumping	sets or unsets the jumping mode.
+	 */
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
 	}
 
+	/**
+	 * Tells wether we are currently jumping or not.
+	 *
+	 * @return true if we're jumping.
+	 */
 	public boolean isJumping() {
 		return jumping;
 	}
 
+	/**
+	 * Enables or disables reverse browsing of instruction.
+	 *
+	 * @param r	true to make the Interpreter browse instructions in reverse order.
+	 */
 	public void setReversed(boolean r) {
 		this.reversed = r;
 	}
 
+	/**
+	 * Tells wether the parser is in reverse order mode or not.
+	 *
+	 * @return true if we're browsing instructions in reverse order.
+	 */
 	public boolean isReversed() {
 		return reversed;
 	}
 
 	/**
-	 * Store an input flux in the machine 
+	 * Store an input flux in the machine.
          *
 	 * @param ss	Input flux to load in the machine
 	 */
@@ -182,6 +192,7 @@ public class Machine {
  	 * Return the next input value read in the file
 	 *
 	 * @return The next inputted character
+	 * @throws EndOfInputException	if the input didn't have enough character to read.
 	 */
 	public Character getInputFlux(){
 		if(this.inputs == null){
@@ -195,11 +206,11 @@ public class Machine {
 				System.out.println(this.inputs.get(i));
 			}
 			if(this.inputs.isEmpty()){
-				System.exit(42);
+				throw new EndOfInputException();
 			}
-			return this.inputs.remove(0);	
+			return this.inputs.remove(0);
 		}
-	}	
+	}
 
 	public void useOutputFlux(String str){
 		if(this.output == null){
@@ -210,7 +221,9 @@ public class Machine {
 	}
 
 	/**
-	 * @return Memory's content.
+	 * Dumps the memory content to a String.
+	 *
+	 * @return Memory's content as a String.
 	 */
 	public String dumpMemory() {
 		return memory.toString();
