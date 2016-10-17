@@ -1,6 +1,7 @@
 package test.levels;
 
 import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
 
 import java.io.File;
@@ -130,4 +131,30 @@ public class ComplianceSuite {
 
 		return colors;
 	}
+
+	public static int[] readStdOutImage() throws IOException {
+		byte[] out = outContent.toByteArray();
+		ByteArrayInputStream bais = new ByteArrayInputStream(out);
+
+		BufferedImage img = ImageIO.read(bais);
+
+		int height = img.getHeight();
+		int width = img.getWidth();
+
+		int nbLine = (int)Math.ceil((float)height/3);
+		int nbCol = (int)Math.ceil((float)width/3);
+
+		int[] colors = new int[nbLine*nbCol];
+
+		int i = 0;
+		for (int y = 0 ; y < height ; y+=3) {
+			for (int x = 0 ; x < width ; x+=3) {
+				colors[i] = img.getRGB(x, y);
+				i++;
+			}
+		}
+
+		return colors;
+	}
+
 }

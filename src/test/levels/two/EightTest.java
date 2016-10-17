@@ -124,11 +124,9 @@ public class EightTest {
 		} catch (SecurityException se) {
 		}
 
-		int[] colors = ComplianceSuite.readGenImage();
+		int[] colors = ComplianceSuite.readStdOutImage();
 
 		assertArrayEquals(new int[] {0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}, colors);
-
-		assertEquals(0, ComplianceSuite.outContent.size());
 		assertEquals(0, ComplianceSuite.errContent.size());
 		assertEquals(0, ComplianceSuite.exitCode);
 	}
