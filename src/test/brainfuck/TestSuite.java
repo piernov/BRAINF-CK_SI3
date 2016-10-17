@@ -9,7 +9,7 @@ import org.junit.rules.ExternalResource;
 
 import test.brainfuck.virtualmachine.*;
 import test.brainfuck.instructions.*;
-import test.brainfuck.fileio.*;
+import test.brainfuck.io.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

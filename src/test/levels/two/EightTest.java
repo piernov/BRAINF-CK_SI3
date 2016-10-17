@@ -40,10 +40,9 @@ public class EightTest {
 		} catch (SecurityException se) {
 		}
 
-		int[] colors = ComplianceSuite.readGenImage();
+		int[] colors = ComplianceSuite.readStdOutImage();
 
 		assertArrayEquals(new int[] {0xFFFFFFFF, 0xFF4B0082, 0xFF9400D3, 0xFF0000FF, 0xFFFF7F00, 0xFFFF0000, 0xFF00FF00, 0xFFFFFF00, 0xFF000000}, colors);
-		assertEquals(0, ComplianceSuite.outContent.size());
 		assertEquals(0, ComplianceSuite.errContent.size());
 		assertEquals(0, ComplianceSuite.exitCode);
 	}
@@ -58,10 +57,9 @@ public class EightTest {
 		} catch (SecurityException se) {
 		}
 
-		int[] colors = ComplianceSuite.readGenImage();
+		int[] colors = ComplianceSuite.readStdOutImage();
 
 		assertArrayEquals(new int[] {0xFFFFFFFF, 0xFF4B0082, 0xFF9400D3, 0xFF0000FF, 0xFFFF7F00, 0xFFFF0000, 0xFF00FF00, 0xFFFFFF00, 0xFF000000}, colors);
-		assertEquals(0, ComplianceSuite.outContent.size());
 		assertEquals(0, ComplianceSuite.errContent.size());
 		assertEquals(0, ComplianceSuite.exitCode);
 	}
@@ -76,10 +74,9 @@ public class EightTest {
 		} catch (SecurityException se) {
 		}
 
-		int[] colors = ComplianceSuite.readGenImage();
+		int[] colors = ComplianceSuite.readStdOutImage();
 
 		assertArrayEquals(new int[] {0xFFFFFFFF, 0xFFFFFFFF, 0xFF4B0082, 0xFF4B0082, 0xFF9400D3, 0xFF9400D3, 0xFF0000FF, 0xFF0000FF, 0xFFFF7F00, 0xFFFF7F00, 0xFFFF0000, 0xFFFF0000, 0xFF00FF00, 0xFF00FF00, 0xFFFFFF00, 0xFFFFFF00}, colors);
-		assertEquals(0, ComplianceSuite.outContent.size());
 		assertEquals(0, ComplianceSuite.errContent.size());
 		assertEquals(0, ComplianceSuite.exitCode);
 	}

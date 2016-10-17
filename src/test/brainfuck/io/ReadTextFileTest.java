@@ -1,6 +1,6 @@
-package test.brainfuck.fileio;
+package test.brainfuck.io;
 
-import brainfuck.fileio.ReadTextFile;
+import brainfuck.io.ReadTextFile;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
