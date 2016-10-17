@@ -3,12 +3,20 @@ package test.levels;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import javax.imageio.ImageIO;
+import java.util.List;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Color;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -28,7 +36,8 @@ import test.levels.one.*;
 	ThreeTest.class,
 	FourTest.class,
 	FiveTest.class,
-	SixTest.class
+	SixTest.class,
+	SevenTest.class,
 })
 
 public class ComplianceSuite {
@@ -78,5 +87,22 @@ public class ComplianceSuite {
 		try (BufferedWriter writer = Files.newBufferedWriter(filepath)) {
 			writer.write(content);
 		}
+	}
+
+	public static void writeImage(String filename, int colors[], int nbCol) throws IOException {
+		final int SIZE_SQUARE = 3;
+		int nbLine = (int) Math.ceil((float)colors.length / nbCol);
+
+		BufferedImage image = new BufferedImage(SIZE_SQUARE*nbCol, SIZE_SQUARE*nbLine, BufferedImage. TYPE_INT_RGB);
+		Graphics graph = image.createGraphics();
+
+		for (int i = 0; i < colors.length; i++) {
+			graph.setColor(new Color(colors[i]));
+			//Add a rectangle to the graphic. The first two arguments are the coordinates.
+			//The others are the size of the rectangle.
+			graph.fillRect(SIZE_SQUARE*(i%nbCol), SIZE_SQUARE*(i/nbCol), SIZE_SQUARE, SIZE_SQUARE);
+		}
+
+		ImageIO.write(image, "bmp", new File(filename));
 	}
 }
