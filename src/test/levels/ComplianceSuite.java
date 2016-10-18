@@ -41,6 +41,7 @@ import test.levels.one.*;
 	SevenTest.class,
 	EightTest.class,
 	TenTest.class,
+	ElevenTest.class,
 })
 
 public class ComplianceSuite {
