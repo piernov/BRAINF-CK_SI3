@@ -1,12 +1,14 @@
 package brainfuck;
 
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
 import brainfuck.virtualmachine.Machine;
+import brainfuck.io.Io;
 import brainfuck.exceptions.BrainfuckException;
 import brainfuck.io.WriteImage;
 import brainfuck.io.ReadTextFile;
@@ -16,8 +18,23 @@ import brainfuck.io.ReadImageFile;
  * Entry point for the application.
  *
  * @author Julien Lemaire
+ * @author Pierre-Emmanuel Novac
  */
 public class Main {
+	/**
+	 * ArgParser with parsed arguments.
+	 */
+	private ArgParser argp;
+
+	/**
+	 * Constructs a Main with the given ArgParser, ie. arguments parsed from command line parameters.
+	 *
+	 * @param argp	arguments parsed from main's args.
+	 */
+	Main(ArgParser argp) {
+		this.argp = argp;
+	}
+
 	/**
 	 * Application entry point.
 	 *
@@ -25,10 +42,9 @@ public class Main {
 	 * @throws IOException		in case of IO error on file operation.
 	 */
 	public static void main(String[] args) throws IOException {
-		Main app = new Main();
 		try {
-			ArgParser argp = new ArgParser(args);
-			app.run(argp);
+			Main app = new Main(new ArgParser(args));
+			app.run();
 		} catch (BrainfuckException e) {
 			System.err.println(e);
 			System.exit(e.getErrorCode());
@@ -38,10 +54,9 @@ public class Main {
 	/**
 	 * Runs the requested behaviour depending on the command line arguments.
 	 *
-	 * @param argp	ArgParser's parsed command line arguments.
 	 * @throws IOException	in case of IO error on file operation.
 	 */
-	private void run(ArgParser argp) throws IOException {
+	private void run() throws IOException {
 		InstructionParser ip;
 
 		if (argp.getType() == Type.IMAGE) {
@@ -51,7 +66,8 @@ public class Main {
 		}
 
 		switch(argp.getMode()) {
-			case READ:
+			case RUN:
+				check(ip);
 				execute(ip);
 				break;
 			case REWRITE:
@@ -67,8 +83,7 @@ public class Main {
 				}
 				break;
 			case CHECK:
-				Checker checker = new Checker(ip.get());
-				checker.check();
+				check(ip);
 				break;
 		}
 	}
@@ -100,12 +115,24 @@ public class Main {
 	}
 
 	/**
-	 * Starts the Interpreter to execute the instructions.
+	 * Starts the Checker to make sure the program is well-formed.
 	 *
 	 * @param ip	InstructionParser which previously parsed a file.
 	 */
-	private void execute(InstructionParser ip) {
+	private void check(InstructionParser ip) {
+		Checker checker = new Checker(ip.get());
+		checker.check();
+	}
+
+	/**
+	 * Starts the Interpreter to execute the instructions.
+	 *
+	 * @param ip	InstructionParser which previously parsed a file.
+	 * @throws FileNotFoundException	if creating/opening output file failed.
+	 */
+	private void execute(InstructionParser ip) throws FileNotFoundException {
 		Machine machine = new Machine();
+		machine.setIo(new Io(argp.getInput(),argp.getOutput()));
 		Interpreter interpreter = new Interpreter(ip.get());
 		interpreter.run(machine);
 	}
