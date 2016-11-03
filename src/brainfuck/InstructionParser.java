@@ -45,18 +45,25 @@ public class InstructionParser {
 
 		// Does it need a .filter(l -> !"".equals) ?
 		stream.forEachOrdered(line -> {
-				Instruction instr = iset.getOp(line); // Tries to parse the whole line (ie. long format)
+			if (!line.startsWith("#")) {
+				if (line.contains("#")) {
+					line = line.substring(0, line.indexOf("#"));
+				}
+				Instruction instr = iset.getOp((String)line.trim()); // Tries to parse the whole line (ie. long format)
 				if (instr != null) {
 					instructions.add(instr);
 				} else {
 					for (int i = 0; i < line.length(); i++) { // Tries to executes the instructions with the short format
 						char c = line.charAt(i);
-						instr = iset.getOp(c);
-						if (instr != null) instructions.add(instr);
-						else {
-							throw new InvalidInstructionException(c);
+						if (c != ' ' && c != '\t') {
+							instr = iset.getOp(c);
+							if (instr != null) instructions.add(instr);
+							else {
+								throw new InvalidInstructionException(c);
+							}
 						}
 					}
+				}
 			}
 		});
 
