@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -36,14 +36,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1362"
+     inkscape:window-width="679"
      inkscape:window-height="729"
      id="namedview4791"
      showgrid="false"
-     inkscape:zoom="0.72236944"
-     inkscape:cx="375.09085"
-     inkscape:cy="373.66059"
-     inkscape:window-x="0"
+     inkscape:zoom="0.48"
+     inkscape:cx="598.67067"
+     inkscape:cy="403.36334"
+     inkscape:window-x="683"
      inkscape:window-y="18"
      inkscape:window-maximized="0"
      inkscape:current-layer="surface3671" />
@@ -656,27 +656,27 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:32px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="597.94318"
-       y="140.90404"
+       x="487.56802"
+       y="108.44076"
        id="text3468-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3470-8"
-         x="597.94318"
-         y="140.90404"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';fill:#000080">Useless report</tspan></text>
+         x="487.56802"
+         y="108.44076"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';fill:#000080">Superficial report</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:32px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="88.154701"
-       y="163.94377"
+       x="118.92393"
+       y="175.22583"
        id="text3468-3-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3470-8-0"
-         x="88.154701"
-         y="163.94377"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';fill:#000080">Technical report</tspan></text>
+         x="118.92393"
+         y="175.22583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';fill:#000080"
+         id="tspan10032">Technical and detailed report</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:26.96018028px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -737,5 +737,45 @@
          y="360.82458"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';text-align:center;text-anchor:middle;fill:#000080"
          id="tspan3484-8-9-4-0">Bad design choices</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:26.96018028px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="711.79468"
+       y="411.80106"
+       id="text3480-4-8-6-3-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="711.79468"
+         y="411.80106"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';text-align:center;text-anchor:middle;fill:#000080"
+         id="tspan3484-8-9-4-0-6">Thinking without</tspan><tspan
+         sodipodi:role="line"
+         x="711.79468"
+         y="445.50128"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';text-align:center;text-anchor:middle;fill:#000080"
+         id="tspan10026">experimentation</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="256.4599"
+       y="12.825238"
+       id="text10028"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan10030"
+         x="256.4599"
+         y="12.825238" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="438.29404"
+       y="50.447018"
+       id="text3468-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3470-5"
+         x="438.29404"
+         y="50.447018"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz';fill:#d40000">Team MIAOU</tspan></text>
   </g>
 </svg>
