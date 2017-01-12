@@ -119,12 +119,17 @@ class FunctionsParser implements Function<String, Stream<String>> {
 	 * @return ProcedureCall object corresponding to the current procedure call.
 	 */
 	public ProcedureCall parseCall(String split[]) {
-		ProcedureCall proc;
-		if (split.length > 1) {
-			proc = new ProcedureCall(iset.getProc(split[0]), Integer.parseInt(split[1]));
-		} else {
-			proc = new ProcedureCall(iset.getProc(split[0]));
+		if (split.length < 1)
+			return null;
+		else {
+			Procedure proc = iset.getProc(split[0]);
+			if (proc == null)
+				return null;
+
+			if (split.length > 1)
+				return new ProcedureCall(proc, Integer.parseInt(split[1]));
+			else
+				return new ProcedureCall(proc);
 		}
-		return proc;
 	}
 }

@@ -24,12 +24,12 @@ class InstructionTextParser implements Consumer<String> {
 	@Override
 	public void accept(String line) {
 		Instruction instr = iset.getOp(line); // Tries to parse the whole line (ie. long format)
-		String[] split = line.split(" ");
+
+		if (instr == null) // Maybe it is a procedure call?
+			instr = (new FunctionsParser(iset)).parseCall(line.split(" "));
 
 		if (instr != null) {
 			ip.addInstruction(instr);
-		} else if (iset.getProc(split[0]) != null) { // Maybe it is a procedure call?
-				ip.addInstruction((new FunctionsParser(iset)).parseCall(split));
 		} else {
 			for (int i = 0; i < line.length(); i++) { // Tries to executes the instructions with the short format
 				char c = line.charAt(i);
